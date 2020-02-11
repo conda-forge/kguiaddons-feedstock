@@ -1,5 +1,5 @@
 {% set name = "kguiaddons" %}
-{% set version = "5.66.0" %}
+{% set version = "5.67.0" %}
 {% set major_minor = ".".join(version.split(".")[:2]) %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://download.kde.org/stable/frameworks/{{ major_minor }}/kguiaddons-{{ version }}.tar.xz
-  sha256: 379e5ed87b00d344a13e424e39d97d74d494c503400bcd72df132de74c8cc591
+  sha256: 194c83258eddbc564b7cf41efb7e327fef1e5ed2ef2f348f962b8561f237fe08
 
 build:
   number: 0
