@@ -5,7 +5,7 @@ Home: https://api.kde.org/frameworks/kguiaddons/html/index.html
 
 Package license: GPL-v2
 
-Feedstock license: BSD 3-Clause
+Feedstock license: BSD-3-Clause
 
 Summary: Utilities for graphical user interfaces
 
