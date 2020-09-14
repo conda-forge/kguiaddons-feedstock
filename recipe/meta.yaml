@@ -1,5 +1,5 @@
 {% set name = "kguiaddons" %}
-{% set version = "5.73.0" %}
+{% set version = "5.74.0" %}
 {% set major_minor = ".".join(version.split(".")[:2]) %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://download.kde.org/stable/frameworks/{{ major_minor }}/kguiaddons-{{ version }}.tar.xz
-  sha256: 45b4c5e0195abd79930635bbf20886b15b1b68b13fe4c56068579b91ef147350
+  sha256: bb7c5b88e1738b22571f2f135202b3c08230911fcb8d089b8676d4d59af4578b
 
 build:
   number: 0
@@ -42,9 +42,16 @@ test:
 
 about:
   home: https://api.kde.org/frameworks/kguiaddons/html/index.html
-  license: GPL-v2
-  license_family: GPL
-  license_file: COPYING
+  license: GPL-2.0-only AND GPL-3.0-only AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-3.0-only AND LicenseRef-KDE-Accepted-GPL AND LicenseRef-KDE-Accepted-LGPL
+  license_file:
+    - LICENSES/GPL-2.0-only.txt
+    - LICENSES/GPL-3.0-only.txt
+    - LICENSES/LGPL-2.0-only.txt
+    - LICENSES/LGPL-2.0-or-later.txt
+    - LICENSES/LGPL-2.1-only.txt
+    - LICENSES/LGPL-3.0-only.txt
+    - LICENSES/LicenseRef-KDE-Accepted-GPL.txt
+    - LICENSES/LicenseRef-KDE-Accepted-LGPL.txt
   summary: Utilities for graphical user interfaces
   description: |
     The KDE GUI addons provide utilities for graphical user interfaces
