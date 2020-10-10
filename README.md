@@ -3,11 +3,15 @@ About kguiaddons
 
 Home: https://api.kde.org/frameworks/kguiaddons/html/index.html
 
-Package license: GPL-v2
+Package license: GPL-2.0-only AND GPL-3.0-only AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-3.0-only AND LicenseRef-KDE-Accepted-GPL AND LicenseRef-KDE-Accepted-LGPL
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/kguiaddons-feedstock/blob/master/LICENSE.txt)
 
 Summary: Utilities for graphical user interfaces
+
+Development: https://cgit.kde.org/kguiaddons.git/tree
+
+Documentation: https://api.kde.org/frameworks/karchive/html/index.html
 
 The KDE GUI addons provide utilities for graphical user interfaces
 in the areas of colors, fonts, text, images, keyboard input.
