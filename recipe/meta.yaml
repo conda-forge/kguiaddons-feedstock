@@ -11,7 +11,7 @@ source:
   sha256: bdaa2ed104bfa9c2ebd702f033935a83560e1d00c7302620a6ae52cb309c7125
 
 build:
-  number: 0
+  number: 1
   skip: true  # [not linux]
   run_exports:
     - {{ pin_subpackage('kguiaddons', max_pin='x.x') }}
@@ -23,16 +23,12 @@ requirements:
     - cmake
     - make
     - extra-cmake-modules >={{ version }}
-    - {{ cdt('mesa-libgl-devel') }}  # [linux]
-    - {{ cdt('mesa-dri-drivers') }}  # [linux]
-    - {{ cdt('libselinux') }}  # [linux]
-    - {{ cdt('libxdamage') }}  # [linux]
-    - {{ cdt('libxxf86vm') }}  # [linux]
   host:
     - xorg-libxfixes  # [linux]
     - xorg-libxext
     - xorg-libx11
     - qt
+    - libgl-devel                    # [linux]
   run:
     - xorg-libx11
 
