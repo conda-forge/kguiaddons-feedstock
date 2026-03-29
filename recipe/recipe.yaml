@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   version: "5.116.0"
-  major_minor: ${{ ".".join(version | split(".")[:2]) }}
+  major_minor: ${{ (version | split('.'))[:2] | join(".") }}
 
 package:
   name: kguiaddons
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://download.kde.org/stable/frameworks/${{ major_minor }}/kguiaddons-${{ version }}.tar.xz
-  sha256: bdaa2ed104bfa9c2ebd702f033935a83560e1d00c7302620a6ae52cb309c7125
+  sha256: 5c10d56cb02cb60710c2412d4a3d02671cad74f25d1e9889c6c741f6e833fce6
 
 build:
   number: 0
@@ -20,13 +20,14 @@ requirements:
   build:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
     - cmake
     - ninja
     - extra-cmake-modules >=${{ version }}
   host:
     - qt5-main
     - if: linux
-      then: 
+      then:
         - libgl-devel
         - xorg-libxfixes
         - xorg-libxext
