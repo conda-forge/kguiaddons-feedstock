@@ -1,43 +1,44 @@
-{% set name = "kguiaddons" %}
-{% set version = "5.76.0" %}
-{% set major_minor = ".".join(version.split(".")[:2]) %}
+schema_version: 1
+
+context:
+  version: "5.116.0"
+  major_minor: ${{ ".".join(version | split(".")[:2]) }}
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: kguiaddons
+  version: ${{ version }}
 
 source:
-  url: https://download.kde.org/stable/frameworks/{{ major_minor }}/kguiaddons-{{ version }}.tar.xz
+  url: https://download.kde.org/stable/frameworks/${{ major_minor }}/kguiaddons-${{ version }}.tar.xz
   sha256: bdaa2ed104bfa9c2ebd702f033935a83560e1d00c7302620a6ae52cb309c7125
 
 build:
-  number: 1
-  skip: true  # [not linux]
-  run_exports:
-    - {{ pin_subpackage('kguiaddons', max_pin='x.x') }}
+  number: 0
+  skip: win
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
     - cmake
-    - make
-    - extra-cmake-modules >={{ version }}
+    - ninja
+    - extra-cmake-modules >=${{ version }}
   host:
-    - xorg-libxfixes  # [linux]
-    - xorg-libxext
-    - xorg-libx11
-    - qt
-    - libgl-devel                    # [linux]
-  run:
-    - xorg-libx11
+    - qt5-main
+    - if: linux
+      then: 
+        - libgl-devel
+        - xorg-libxfixes
+        - xorg-libxext
+        - xorg-libx11
+  run_exports:
+    - ${{ pin_subpackage('kguiaddons', upper_bound='x.x') }}
 
-test:
-  commands:
-    - test -f ${PREFIX}/lib/libKF5GuiAddons.so
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libKF5GuiAddons${SHLIB_EXT}
 
 about:
-  home: https://api.kde.org/frameworks/kguiaddons/html/index.html
   license: GPL-2.0-only AND GPL-3.0-only AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-3.0-only AND LicenseRef-KDE-Accepted-GPL AND LicenseRef-KDE-Accepted-LGPL
   license_file:
     - LICENSES/GPL-2.0-only.txt
@@ -52,8 +53,9 @@ about:
   description: |
     The KDE GUI addons provide utilities for graphical user interfaces
     in the areas of colors, fonts, text, images, keyboard input.
-  doc_url: https://api.kde.org/frameworks/karchive/html/index.html
-  dev_url: https://cgit.kde.org/kguiaddons.git/tree
+  homepage: https://api.kde.org/frameworks/kguiaddons/html/index.html
+  repository: https://cgit.kde.org/kguiaddons.git/tree
+  documentation: https://api.kde.org/frameworks/karchive/html/index.html
 
 extra:
   recipe-maintainers:
