@@ -25,7 +25,7 @@ requirements:
     - ninja
     - extra-cmake-modules >=${{ version }}
   host:
-    - qt5-main
+    - qt-main
     - if: linux
       then:
         - libgl-devel
