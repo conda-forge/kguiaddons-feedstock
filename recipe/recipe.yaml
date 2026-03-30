@@ -26,6 +26,7 @@ requirements:
     - extra-cmake-modules >=${{ version }}
   host:
     - qt-main
+    - qt-wayland
     - if: linux
       then:
         - libgl-devel
