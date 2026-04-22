@@ -1,0 +1,64 @@
+schema_version: 1
+
+context:
+  version: "5.116.0"
+  major_minor: ${{ (version | split('.'))[:2] | join(".") }}
+
+package:
+  name: kguiaddons
+  version: ${{ version }}
+
+source:
+  url: https://download.kde.org/stable/frameworks/${{ major_minor }}/kguiaddons-${{ version }}.tar.xz
+  sha256: 5c10d56cb02cb60710c2412d4a3d02671cad74f25d1e9889c6c741f6e833fce6
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
+    - cmake
+    - ninja
+    - extra-cmake-modules >=${{ version }}
+  host:
+    - qt-main
+    - qt-wayland
+    - if: linux
+      then:
+        - libgl-devel
+        - xorg-libxfixes
+        - xorg-libxext
+        - xorg-libx11
+  run_exports:
+    - ${{ pin_subpackage('kguiaddons', upper_bound='x.x') }}
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libKF5GuiAddons${SHLIB_EXT}
+
+about:
+  license: GPL-2.0-only AND GPL-3.0-only AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-3.0-only AND LicenseRef-KDE-Accepted-GPL AND LicenseRef-KDE-Accepted-LGPL
+  license_file:
+    - LICENSES/GPL-2.0-only.txt
+    - LICENSES/GPL-3.0-only.txt
+    - LICENSES/LGPL-2.0-only.txt
+    - LICENSES/LGPL-2.0-or-later.txt
+    - LICENSES/LGPL-2.1-only.txt
+    - LICENSES/LGPL-3.0-only.txt
+    - LICENSES/LicenseRef-KDE-Accepted-GPL.txt
+    - LICENSES/LicenseRef-KDE-Accepted-LGPL.txt
+  summary: Utilities for graphical user interfaces
+  description: |
+    The KDE GUI addons provide utilities for graphical user interfaces
+    in the areas of colors, fonts, text, images, keyboard input.
+  homepage: https://api.kde.org/frameworks/kguiaddons/html/index.html
+  repository: https://cgit.kde.org/kguiaddons.git/tree
+  documentation: https://api.kde.org/frameworks/karchive/html/index.html
+
+extra:
+  recipe-maintainers:
+    - scopatz

@@ -1,17 +1,13 @@
 #!/usr/bin/env bash
-set -ex
 
-mkdir build
-pushd build
+set -o xtrace -o nounset -o pipefail -o errexit
 
-cmake -DCMAKE_INSTALL_PREFIX=$PREFIX \
-      -DCMAKE_BUILD_TYPE=Release     \
-      -DKDE_INSTALL_LIBDIR=lib \
-      -Wno-dev \
-      ..
+cmake -B build -S ${SRC_DIR} -G Ninja
+    -DCMAKE_BUILD_TYPE=Release     \
+    -Wno-dev \
+    ${CMAKE_ARGS}
 
-make -j ${CPU_COUNT}
+cmake --build build -j ${CPU_COUNT}
 # Test fail on CI with Child aborted***Exception, but pass locally
 # make test
-make install
-popd
+cmake --install build
